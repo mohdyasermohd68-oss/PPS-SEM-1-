@@ -42,8 +42,8 @@ Output: [[1,4],[2,5],[3,6]]
 
 **Language:** C  
 **Runtime:** 0 ms (beats 100.00%)  
-**Memory:** 16.1 MB (beats 13.89%)  
-**Submitted:** 2026-11-26T08:40:11.954Z  
+**Memory:** 15.8 MB (beats 64.98%)  
+**Submitted:** 2026-11-26T08:40:44.852Z  
 
 ```c
 int** transpose(int** matrix, int matrixSize, int* matrixColSize,
