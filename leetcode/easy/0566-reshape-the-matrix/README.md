@@ -45,63 +45,43 @@ Output: [[1,2],[3,4]]
 ## Solution
 
 **Language:** C  
-**Runtime:** 2 ms (beats 4.58%)  
-**Memory:** 16 MB (beats 15.31%)  
-**Submitted:** 2026-11-26T08:41:42.080Z  
+**Runtime:** 0 ms (beats 100.00%)  
+**Memory:** 15.7 MB (beats 61.83%)  
+**Submitted:** 2026-11-27T16:56:38.673Z  
 
 ```c
-/**
- * Return an array of arrays.
- * The sizes of the rows are returned in *returnColumnSizes.
- * The number of rows is returned in *returnSize.
- */
-int** matrixReshape(int** mat, int matSize, int* matColSize,
-                    int r, int c, int* returnSize,
+#include <stdlib.h>
+
+int** matrixReshape(int** mat, int matSize,
+                    int* matColSize, int r, int c,
+                    int* returnSize,
                     int** returnColumnSizes) {
 
-    int m = matSize;
-    int n = matColSize[0];
+    int rows = matSize;
+    int cols = matColSize[0];
 
-    // Check whether reshaping is possible
-    if (m * n != r * c) {
-        *returnSize = m;
-        *returnColumnSizes = (int*)malloc(m * sizeof(int));
-
-        for (int i = 0; i < m; i++) {
-            (*returnColumnSizes)[i] = n;
-        }
-
+    if (rows * cols != r * c) {
+        *returnSize = rows;
+        *returnColumnSizes = matColSize;
         return mat;
     }
 
-    // Allocate memory for reshaped matrix
     int** result = (int**)malloc(r * sizeof(int*));
-
     *returnColumnSizes = (int*)malloc(r * sizeof(int));
 
-    int row = 0, col = 0;
+    *returnSize = r;
 
     for (int i = 0; i < r; i++) {
         result[i] = (int*)malloc(c * sizeof(int));
         (*returnColumnSizes)[i] = c;
-
-        for (int j = 0; j < c; j++) {
-            result[i][j] = mat[row][col];
-
-            col++;
-
-            if (col == n) {
-                col = 0;
-                row++;
-            }
-        }
     }
 
-    *returnSize = r;
+    for (int i = 0; i < rows * cols; i++) {
+        result[i / c][i % c] = mat[i / cols][i % cols];
+    }
 
     return result;
-}  
-
+}
 ```
 
 ---
