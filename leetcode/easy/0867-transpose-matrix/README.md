@@ -42,35 +42,31 @@ Output: [[1,4],[2,5],[3,6]]
 
 **Language:** C  
 **Runtime:** 0 ms (beats 100.00%)  
-**Memory:** 15.8 MB (beats 64.98%)  
-**Submitted:** 2026-11-26T08:40:44.852Z  
+**Memory:** 15.9 MB (beats 34.54%)  
+**Submitted:** 2026-11-27T16:52:53.204Z  
 
 ```c
-int** transpose(int** matrix, int matrixSize, int* matrixColSize,
-                int* returnSize, int** returnColumnSizes) {
+int** transpose(int** matrix, int matrixSize,
+                int* matrixColSize,
+                int* returnSize,
+                int** returnColumnSizes) {
 
     int rows = matrixSize;
     int cols = matrixColSize[0];
 
-    // Allocate memory for result matrix
     int** result = (int**)malloc(cols * sizeof(int*));
 
-    // Allocate memory for column sizes
+    *returnSize = cols;
     *returnColumnSizes = (int*)malloc(cols * sizeof(int));
 
-    // Transpose matrix
     for (int i = 0; i < cols; i++) {
-
         result[i] = (int*)malloc(rows * sizeof(int));
-
         (*returnColumnSizes)[i] = rows;
 
         for (int j = 0; j < rows; j++) {
             result[i][j] = matrix[j][i];
         }
     }
-
-    *returnSize = cols;
 
     return result;
 }
