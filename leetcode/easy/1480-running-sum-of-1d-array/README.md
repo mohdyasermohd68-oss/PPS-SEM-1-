@@ -47,26 +47,18 @@ Output: [3,4,6,16,17]
 
 **Language:** C  
 **Runtime:** 0 ms (beats 100.00%)  
-**Memory:** 12 MB (beats 16.20%)  
-**Submitted:** 2026-11-26T08:39:27.541Z  
+**Memory:** 11.8 MB (beats 37.58%)  
+**Submitted:** 2026-11-27T16:50:52.635Z  
 
 ```c
-/**
- * Note: The returned array must be malloced, assume caller calls free().
- */
 int* runningSum(int* nums, int numsSize, int* returnSize) {
-    int* result = (int*)malloc(numsSize * sizeof(int));
-
-    int sum = 0;
-
-    for (int i = 0; i < numsSize; i++) {
-        sum += nums[i];
-        result[i] = sum;
-    }
-
     *returnSize = numsSize;
 
-    return result;
+    for (int i = 1; i < numsSize; i++) {
+        nums[i] = nums[i] + nums[i - 1];
+    }
+
+    return nums;
 }
 ```
 
